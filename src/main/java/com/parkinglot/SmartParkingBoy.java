@@ -4,6 +4,7 @@ import com.parkinglot.Car;
 import com.parkinglot.ParkingLot;
 import com.parkinglot.ParkingTicket;
 import com.parkinglot.exception.NoAvailablePositionException;
+import com.parkinglot.exception.UnrecognizedTicketException;
 
 import java.util.Comparator;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 public class SmartParkingBoy {
     private final List<ParkingLot> parkingLotList;
 
-    public SmartParkingBoy(List<ParkingLot> parkingLotList) {
+    public SmartParkingBoy(List<ParkingLot> parkingLotList){
         this.parkingLotList = parkingLotList;
     }
 
@@ -24,10 +25,12 @@ public class SmartParkingBoy {
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
-        return parkingLotList.stream()
-                .map(parkingLot -> parkingLot.fetch(parkingTicket))
-                .filter(car -> car != null)
-                .findFirst()
-                .orElse(null);
+        for (ParkingLot parkingLot : parkingLotList) {
+            try {
+                return parkingLot.fetch(parkingTicket);
+            } catch (UnrecognizedTicketException ignored) {
+            }
+        }
+        throw new UnrecognizedTicketException();
     }
 }
