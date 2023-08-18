@@ -56,7 +56,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_null_when_fetch_given_wrong_ticket(){
+    void should_return_exception_when_fetch_given_wrong_ticket(){
         //Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
@@ -74,7 +74,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_null_when_fetch_given_used_ticket(){
+    void should_return_exception_when_fetch_given_used_ticket(){
         // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
@@ -91,7 +91,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_null_when_park_given_no_available_capacity(){
+    void should_return_exception_when_park_given_no_available_capacity(){
         // Given
         ParkingLot parkingLot = new ParkingLot(1);
         Car car1 = new Car();
