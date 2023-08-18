@@ -1,8 +1,4 @@
 package com.parkinglot;
-
-import com.parkinglot.Car;
-import com.parkinglot.ParkingLot;
-import com.parkinglot.ParkingTicket;
 import com.parkinglot.exception.NoAvailablePositionException;
 import com.parkinglot.exception.UnrecognizedTicketException;
 
@@ -21,7 +17,11 @@ public class SmartParkingBoy {
                 .max(Comparator.comparingInt(ParkingLot::getAvailableCapacity))
                 .orElseThrow(NoAvailablePositionException::new);
 
-        return parkingLotWithMostEmptyPositions.park(car);
+        if (parkingLotWithMostEmptyPositions.getAvailableCapacity() > 0) {
+            return parkingLotWithMostEmptyPositions.park(car);
+        } else {
+            throw new NoAvailablePositionException();
+        }
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
