@@ -70,4 +70,21 @@ public class StandardParkingBoyTest {
         assertEquals(car2, fetchedCar2);
     }
 
+
+    @Test
+    void should_throw_unrecognized_ticket_exception_when_fetch_given_unrecognized_ticket() {
+        // Given
+        ParkingLot firstParkingLot = new ParkingLot();
+        ParkingLot secondParkingLot = new ParkingLot();
+        List<ParkingLot> parkingLots = List.of(firstParkingLot, secondParkingLot);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+
+        ParkingTicket unrecognizedTicket = new ParkingTicket(); // Create an unrecognized ticket
+
+        // When
+        //Then
+        assertThrows(UnrecognizedTicketException.class, () -> {
+            standardParkingBoy.fetch(unrecognizedTicket);
+        });
+    }
 }
