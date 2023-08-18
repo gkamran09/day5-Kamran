@@ -1,5 +1,6 @@
 import com.parkinglot.Car;
 import com.parkinglot.ParkingLot;
+import com.parkinglot.ParkingTicket;
 import com.parkinglot.SuperParkingBoy;
 import org.junit.jupiter.api.Test;
 
@@ -56,5 +57,25 @@ public class SuperParkingBoyTest {
         // Then
         assertEquals(9, firstParkingLot.getAvailableCapacity());
         assertEquals(10,secondParkingLot.getAvailableCapacity());
+    }
+
+    @Test
+    void should_park_car_in_second_parking_lot_when_first_is_full_given_super_parking_boy() {
+        // Given
+        ParkingLot firstParkingLot = new ParkingLot(2);
+        ParkingLot secondParkingLot = new ParkingLot();
+
+        firstParkingLot.park(new Car());
+        firstParkingLot.park(new Car());
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy(List.of(firstParkingLot, secondParkingLot));
+        Car car = new Car();
+
+        // When
+        ParkingTicket parkingTicket = superParkingBoy.park(car);
+
+        // Then
+        assertEquals(0, firstParkingLot.getAvailableCapacity());
+        assertEquals(9, secondParkingLot.getAvailableCapacity());
+        assertEquals(car, secondParkingLot.fetch(parkingTicket));
     }
 }
