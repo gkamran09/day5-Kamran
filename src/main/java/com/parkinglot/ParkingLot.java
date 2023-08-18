@@ -13,6 +13,7 @@ public class ParkingLot {
     private final int capacity;
     private boolean isFull;
 
+
     public ParkingLot() {
         capacity = DEFAULT_CAPACITY;
         this.ticketCarMap = new HashMap<>();
@@ -50,5 +51,11 @@ public class ParkingLot {
 
     public boolean hasAvailableCapacity(){
         return !isFull;
+    }
+    public int getTotalCapacity() {
+        return capacity;
+    }
+    public double getAvailablePositionRate() {
+        return (double) getAvailableCapacity() / getTotalCapacity();
     }
 }
