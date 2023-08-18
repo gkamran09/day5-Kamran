@@ -5,15 +5,21 @@ import java.util.Map;
 
 public class ParkingLot {
 
-    private Map<ParkingTicket, Car> ticketCarMap;
+    private final Map<ParkingTicket, Car> ticketCarMap;
+    private final int capacity;
 
-    public ParkingLot(){
+    public ParkingLot(int capacity){
+        this.capacity = capacity;
         this.ticketCarMap =new HashMap<>();
     }
     public ParkingTicket park (Car car){
-        ParkingTicket ticket = new ParkingTicket();
-        ticketCarMap.put(ticket, car);
-        return ticket;
+        if (ticketCarMap.size() < capacity) {
+            ParkingTicket ticket = new ParkingTicket();
+            ticketCarMap.put(ticket, car);
+            return ticket;
+        } else {
+            return null;
+        }
     }
     public Car fetch(ParkingTicket parkingTicket) {
         Car fetchedCar = ticketCarMap.get(parkingTicket);
