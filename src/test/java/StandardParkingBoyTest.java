@@ -1,6 +1,7 @@
 import com.parkinglot.Car;
 import com.parkinglot.ParkingLot;
 import com.parkinglot.ParkingTicket;
+import com.parkinglot.exception.UnrecognizedTicketException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -45,4 +46,28 @@ public class StandardParkingBoyTest {
         assertEquals(0, firstParkingLot.getAvailableCapacity());
         assertEquals(9, secondParkingLot.getAvailableCapacity());
     }
+
+    @Test
+    void should_return_correct_car_with_each_ticket_when_fetch_given_standard_parking_boy_two_parked_cars_and_tickets() {
+        // Given
+        ParkingLot firstParkingLot = new ParkingLot();
+        ParkingLot secondParkingLot = new ParkingLot();
+        List<ParkingLot> parkingLots = List.of(firstParkingLot, secondParkingLot);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+
+        Car car1 = new Car();
+        Car car2 = new Car();
+
+        ParkingTicket ticket1 = standardParkingBoy.park(car1);
+        ParkingTicket ticket2 = standardParkingBoy.park(car2);
+
+        // When
+        Car fetchedCar1 = standardParkingBoy.fetch(ticket1);
+        Car fetchedCar2 = standardParkingBoy.fetch(ticket2);
+
+        // Then
+        assertEquals(car1, fetchedCar1);
+        assertEquals(car2, fetchedCar2);
+    }
+
 }
