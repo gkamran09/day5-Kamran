@@ -134,4 +134,27 @@ public class SmartParkingBoyTest {
         );
         assertEquals("No available position", exception.getMessage());
     }
+
+
+    @Test
+    void should_park_car_in_lot_with_most_empty_positions() {
+        // Given
+        ParkingLot firstParkingLot = new ParkingLot(5);
+        ParkingLot secondParkingLot = new ParkingLot(10);
+        ParkingLot thirdParkingLot = new ParkingLot(7);
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(firstParkingLot);
+        parkingLots.add(secondParkingLot);
+        parkingLots.add(thirdParkingLot);
+
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+        Car car = new Car();
+
+        // When
+       smartParkingBoy.park(car);
+
+        // Then
+        assertEquals(9, secondParkingLot.getAvailableCapacity());
+
+    }
 }
