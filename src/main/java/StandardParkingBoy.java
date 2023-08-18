@@ -1,6 +1,7 @@
 import com.parkinglot.Car;
 import com.parkinglot.ParkingLot;
 import com.parkinglot.ParkingTicket;
+import com.parkinglot.exception.NoAvailablePositionException;
 import com.parkinglot.exception.UnrecognizedTicketException;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class StandardParkingBoy {
                 return parkingLot.park(car);
             }
         }
-        return null;
+        throw new NoAvailablePositionException();
     }
 
     public Car fetch(ParkingTicket parkingTicket) {

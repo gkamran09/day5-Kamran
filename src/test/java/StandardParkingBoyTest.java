@@ -1,7 +1,9 @@
 import com.parkinglot.Car;
 import com.parkinglot.ParkingLot;
 import com.parkinglot.ParkingTicket;
+import com.parkinglot.exception.NoAvailablePositionException;
 import com.parkinglot.exception.UnrecognizedTicketException;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -105,6 +107,25 @@ public class StandardParkingBoyTest {
         assertThrows(UnrecognizedTicketException.class, () -> {
             standardParkingBoy.fetch(ticket);
         });
+    }
+
+    @Test
+    void should_throw_no_available_position_exception_when_park_given_full_parking_lots() {
+        // Given
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(1);
+        List<ParkingLot> parkingLots = List.of(firstParkingLot, secondParkingLot);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+        standardParkingBoy.park(new Car());
+        standardParkingBoy.park(new Car());
+        Car car = new Car();
+
+        // When and Then
+        NoAvailablePositionException exception = assertThrows(
+                NoAvailablePositionException.class,
+                () -> standardParkingBoy.park(car)
+        );
+        assertEquals("No available position", exception.getMessage());
     }
 
 }
