@@ -1,5 +1,7 @@
 package com.parkinglot;
 
+import com.parkinglot.exception.UnrecognizedTicketException;
+
 import java.util.List;
 
 public class SuperParkingBoy {
@@ -41,5 +43,16 @@ public class SuperParkingBoy {
         }
 
         return bestParkingLot;
+    }
+
+    public Car fetch(ParkingTicket ticket) {
+        for (ParkingLot parkingLot : parkingLots) {
+            try {
+                Car car = parkingLot.fetch(ticket);
+                return car;
+            } catch (UnrecognizedTicketException ignored) {
+            }
+        }
+        throw new UnrecognizedTicketException();
     }
 }

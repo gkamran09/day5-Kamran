@@ -78,4 +78,26 @@ public class SuperParkingBoyTest {
         assertEquals(9, secondParkingLot.getAvailableCapacity());
         assertEquals(car, secondParkingLot.fetch(parkingTicket));
     }
+
+    @Test
+    void should_return_right_car_with_each_ticket_given_super_parking_boy() {
+        // Given
+        ParkingLot firstParkingLot = new ParkingLot();
+        ParkingLot secondParkingLot = new ParkingLot();
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy(List.of(firstParkingLot, secondParkingLot));
+
+        Car car1 = new Car();
+        Car car2 = new Car();
+
+        ParkingTicket ticket1 = superParkingBoy.park(car1);
+        ParkingTicket ticket2 = superParkingBoy.park(car2);
+
+        // When
+        Car fetchedCar1 = superParkingBoy.fetch(ticket1);
+        Car fetchedCar2 = superParkingBoy.fetch(ticket2);
+
+        // Then
+        assertEquals(car1, fetchedCar1);
+        assertEquals(car2, fetchedCar2);
+    }
 }
