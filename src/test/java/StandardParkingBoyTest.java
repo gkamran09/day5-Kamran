@@ -72,7 +72,7 @@ public class StandardParkingBoyTest {
 
 
     @Test
-    void should_throw_unrecognized_ticket_exception_when_fetch_given_unrecognized_ticket() {
+    void should_throw_exception_when_fetch_given_standard_parking_boy_and_unrecognized_ticket() {
         // Given
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
@@ -87,4 +87,24 @@ public class StandardParkingBoyTest {
             standardParkingBoy.fetch(unrecognizedTicket);
         });
     }
+
+    @Test
+    void should_throw_used_ticket_exception_when_fetch_given_standard_parking_boy_used_ticket() {
+        // Given
+        ParkingLot firstParkingLot = new ParkingLot();
+        ParkingLot secondParkingLot = new ParkingLot();
+        List<ParkingLot> parkingLots = List.of(firstParkingLot, secondParkingLot);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+
+        Car car = new Car();
+        ParkingTicket ticket = standardParkingBoy.park(car);
+
+        //When
+        //Then
+        standardParkingBoy.fetch(ticket);
+        assertThrows(UnrecognizedTicketException.class, () -> {
+            standardParkingBoy.fetch(ticket);
+        });
+    }
+
 }
