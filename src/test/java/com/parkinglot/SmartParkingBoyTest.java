@@ -91,6 +91,8 @@ public class SmartParkingBoyTest {
             smartParkingBoy.fetch(unrecognizedTicket);
         });
 
-        assertEquals("Unrecognized Ticket", exception.getMessage());
+        assertEquals("Unrecognized parking ticket.", exception.getMessage());
     }
+
+
 }
