@@ -134,6 +134,4 @@ public class SmartParkingBoyTest {
         );
         assertEquals("No available position", exception.getMessage());
     }
-
-
 }
