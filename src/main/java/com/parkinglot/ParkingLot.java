@@ -11,6 +11,7 @@ public class ParkingLot {
     private static final int DEFAULT_CAPACITY = 10;
     private final Map<ParkingTicket, Car> ticketCarMap;
     private final int capacity;
+    private boolean isFull;
 
     public ParkingLot() {
         capacity = DEFAULT_CAPACITY;
@@ -38,5 +39,16 @@ public class ParkingLot {
         } else {
             return  ticketCarMap.remove(parkingTicket);
         }
+    }
+
+    private boolean isFull(){
+        return ticketCarMap.size() == capacity;
+    }
+    public int getAvailableCapacity() {
+        return capacity - ticketCarMap.size();
+    }
+
+    public boolean hasAvailableCapacity(){
+        return !isFull;
     }
 }
