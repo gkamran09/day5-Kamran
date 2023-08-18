@@ -1,5 +1,6 @@
 package com.parkinglot;
 
+import com.parkinglot.exception.UnrecognizedTicketException;
 import org.junit.jupiter.api.Test;
 
 import static java.util.concurrent.locks.LockSupport.park;
@@ -63,10 +64,12 @@ public class ParkingLotTest {
         ParkingTicket wrongTicket = new ParkingTicket();
 
         //When
-        Car fetchCar = parkingLot.fetch(wrongTicket);
 
         //Then
-        assertNull(fetchCar);
+       UnrecognizedTicketException unrecognizedTicketException = assertThrows(UnrecognizedTicketException.class,() ->{
+           parkingLot.fetch(wrongTicket);
+       });
+       assertEquals("Unrecognized Ticket",unrecognizedTicketException.getMessage());
     }
 
     @Test
