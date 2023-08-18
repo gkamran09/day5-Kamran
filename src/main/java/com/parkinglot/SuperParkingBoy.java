@@ -11,7 +11,7 @@ public class SuperParkingBoy {
 
     public ParkingTicket park(Car car) {
         ParkingLot bestParkingLot = null;
-        double maxRate = -1.0;  // Initialize with a negative value
+        double maxRate = -1.0;
 
         for (ParkingLot parkingLot : parkingLots) {
             double rate = (double) parkingLot.getAvailableCapacity() / parkingLot.getTotalCapacity();
@@ -22,10 +22,10 @@ public class SuperParkingBoy {
         }
 
         if (bestParkingLot != null) {
-            return bestParkingLot.park(car);  // Delegate parking to the selected parking lot
+            return bestParkingLot.park(car);
         }
 
-        return null;  // No available parking lots
+        return null;
     }
 
     public ParkingLot getParkingLotWithHighestRate() {

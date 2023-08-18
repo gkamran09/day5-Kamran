@@ -1,6 +1,5 @@
 import com.parkinglot.Car;
 import com.parkinglot.ParkingLot;
-import com.parkinglot.ParkingTicket;
 import com.parkinglot.SuperParkingBoy;
 import org.junit.jupiter.api.Test;
 
@@ -42,5 +41,20 @@ public class SuperParkingBoyTest {
         }
     }
 
+    @Test
+    void should_park_car_in_first_parking_lot_when_both_have_available_positions_given_super_parking_boy() {
+        // Given
+        ParkingLot firstParkingLot = new ParkingLot();
+        ParkingLot secondParkingLot = new ParkingLot();
 
+        firstParkingLot.park(new Car());
+        new SuperParkingBoy(List.of(firstParkingLot, secondParkingLot));
+
+        // When
+
+
+        // Then
+        assertEquals(9, firstParkingLot.getAvailableCapacity());
+        assertEquals(10,secondParkingLot.getAvailableCapacity());
+    }
 }
