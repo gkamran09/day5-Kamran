@@ -10,7 +10,7 @@ public class ParkingLotTest {
     @Test
     void should_return_ticket_when_park_given_parking_lot_and_car(){
         //Given
-        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
 
         //When
@@ -23,7 +23,7 @@ public class ParkingLotTest {
     @Test
     void should_return_car_when_fetch_given_parking_lot_and_ticket(){
         //Given
-        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
         ParkingTicket parkingTicket = parkingLot.park(car);
         //When
@@ -37,7 +37,7 @@ public class ParkingLotTest {
     @Test
     void should_return_correct_cars_when_fetch_given_parking_lot_and_tickets_and_two_cars() {
         //Given
-        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot = new ParkingLot();
         Car car1 = new Car();
         Car car2 = new Car();
 
@@ -56,7 +56,7 @@ public class ParkingLotTest {
     @Test
     void should_return_null_when_fetch_given_wrong_ticket(){
         //Given
-        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
         parkingLot.park(car);
 
@@ -72,7 +72,7 @@ public class ParkingLotTest {
     @Test
     void should_return_null_when_fetch_given_used_ticket(){
         // Given
-        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
         ParkingTicket ticket = parkingLot.park(car);
 
